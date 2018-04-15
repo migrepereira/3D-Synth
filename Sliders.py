@@ -115,6 +115,9 @@ class StartPage(tk.Frame):
 
 class LocalizePage(tk.Frame):
 
+
+
+  
         def __init__(self, parent, controller):
                 tk.Frame.__init__(self, parent)
                 label = tk.Label(self, text = "Using the X, Y, and Z sliders to localize your track in 3D space", font = LARGE_FONT)
@@ -128,6 +131,48 @@ class LocalizePage(tk.Frame):
 
                 button3 = ttk.Button(self, text = "Done", command = lambda: controller.show_frame(FinalizeTrackPage))
                 button3.pack()
+        
+                xvalue = None
+                yvalue = None
+                zvalue = None
+
+                def w1value():
+                        yvalue = w1.get()
+                        print(yvalue)
+                def w2value():
+                        xvalue = w2.get()
+                        print(xvalue)
+                def w3value():
+                        zvalue =w3.get()
+                        print(zvalue)
+
+
+                
+                w1 = Scale(self, from_ = 0, to = 180, tickinterval = 30 )
+                w1.config(label = 'Y-axis')
+                w1.pack()
+
+                
+
+                button4 = ttk.Button(self, text = "Confirm Y", command = w1value)
+                button4.pack()
+
+ 
+                w2 = Scale(self, from_=0, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
+                w2.config(label = 'X-axis')
+                w2.pack()
+
+                button5 = ttk.Button(self, text = "Confirm X", command = w2value)
+                button5.pack()
+                
+                w3 = Scale(self, from_=0, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
+                w3.config(label = 'Z-axis')
+                w3.pack()
+
+                button6 = ttk.Button(self, text = "Confirm Z", command = w3value)
+                button6.pack()
+
+      
 
 
 class RecordPage(tk.Frame):
@@ -161,9 +206,9 @@ class RecordPage(tk.Frame):
                 canvas.get_tk_widget().pack(side = tk.BOTTOM, fill = tk.BOTH, expand = True)
 
 
-                toolbar = NavigationToolbar2TkAgg(canvas, self)
-                toolbar.update()
-                canvas._tkcanvas.pack(side = tk.TOP, fill = tk.BOTH, expand = True)
+##                toolbar = NavigationToolbar2TkAgg(canvas, self)
+##                toolbar.update()
+##                canvas._tkcanvas.pack(side = tk.TOP, fill = tk.BOTH, expand = True)
 
 
 
@@ -254,17 +299,6 @@ app.mainloop()
 
 
 
-##        def show_values():
-##                print(w1.get(), w2.get())
-##                master = Tk()
-##                w1 = Scale(master, from_ = 0, to = 180, tickinterval = 30)
-##                w1.pack()
-##                w2 = Scale(master, from_=0, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
-##                w2.pack()
-##                w3 = Scale(master, from_=0, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
-##                w3.pack()
-##                w1.config(label = 'Y-axis')
-##                w2.config(label = 'X-axis')
-##                w3.config(label = 'Z-axis')
+   
 
 
