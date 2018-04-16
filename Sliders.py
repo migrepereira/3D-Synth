@@ -158,8 +158,12 @@ class LocalizePage(tk.Frame):
                 #button2.pack()
 
                 def test():
+                    print("localizing track at:")
+                    print("x:")
                     print(xvalue)
+                    print("y:")
                     print(yvalue)
+                    print("z:")
                     print(zvalue)
                     #callCovfefe(xvalue,yvalue,zvalue)
                     controller.show_frame(FinalizeTrackPage)
@@ -310,7 +314,7 @@ class HomePage(tk.Frame):
                 button3 = ttk.Button(self, text = "Add track to current song", command = lambda: controller.show_frame(RecordPage))
                 button3.pack()
 
-                button4 = ttk.Button(self, text = "Export track")
+                button4 = ttk.Button(self, text = "Export Song")
                 button4.pack()
 
                 button1 = ttk.Button(self, text = "Return to Home", command = lambda:  controller.show_frame(StartPage))

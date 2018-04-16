@@ -152,9 +152,9 @@ def callCovfefe(x,y,z):
 
     print('Writing track to file...')
 
-    filename = 'recoredSong.wav'
+    filename = 'localizedSong.wav'
 
 
     radio.write(filename, fs, audio_in)
 
-    print('Your track ' + filename + ' is done!')
+    print('Spatialization Complete')
