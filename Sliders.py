@@ -1,8 +1,13 @@
 #Michael Pereira III
 
-
-
-
+#
+#
+#
+#
+# MICHAEL GUI IMPORTS
+#
+#
+#
 import matplotlib
 matplotlib.use("TkAgg")
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2TkAgg
@@ -30,6 +35,29 @@ from PIL import ImageTk, Image
 
 import pandas as pd
 import numpy as np
+
+
+
+
+#
+# CAMERON GUI IMPORTS
+#
+
+
+
+from recordNotes import *
+#
+#
+#
+
+
+
+
+
+
+
+
+
 
 
 LARGE_FONT = ("Verdana", 12)
@@ -182,7 +210,7 @@ class RecordPage(tk.Frame):
                 label = tk.Label(self, text = "Record a new track for your song!", font = LARGE_FONT)
                 label.pack(pady = 10, padx = 10)
 
-                button1 = ttk.Button(self, text = "Record")
+                button1 = ttk.Button(self, text = "Record", command = runRecord)
                 button1.pack()
 
                 button2 = ttk.Button(self, text = "Stop")
