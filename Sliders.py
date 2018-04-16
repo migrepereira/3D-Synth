@@ -47,6 +47,7 @@ import numpy as np
 
 from recordNotes import *
 from PlayWAVFile import playWAV
+from playSongFile import playSong
 #
 #
 #
@@ -153,15 +154,23 @@ class LocalizePage(tk.Frame):
                 button1 = ttk.Button(self, text = "Play")
                 button1.pack()
 
-                button2 = ttk.Button(self, text = "Stop")
-                button2.pack()
+                #button2 = ttk.Button(self, text = "Stop")
+                #button2.pack()
 
-                button3 = ttk.Button(self, text = "Done", command = lambda: controller.show_frame(FinalizeTrackPage))
+                def test():
+                    print(xvalue)
+                    print(yvalue)
+                    print(zvalue)
+                    #callCovfefe(xvalue,yvalue,zvalue)
+                    controller.show_frame(FinalizeTrackPage)
+
+
+                button3 = ttk.Button(self, text = "Done", command = test)
                 button3.pack()
 
-                xvalue = None
-                yvalue = None
-                zvalue = None
+                xvalue = 0
+                yvalue = 0
+                zvalue = 0
 
                 def w1value():
                         yvalue = w1.get()
@@ -199,9 +208,14 @@ class LocalizePage(tk.Frame):
                 button6 = ttk.Button(self, text = "Confirm Z", command = w3value)
                 button6.pack()
 
-                #button7 = ttk.Button(self, text = "Run")
-                button7 = ttk.Button(self, text = "Run", command = callCovfefe)
-                button7.pack()
+                def test():
+                    print(xvalue)
+                    print(yvalue)
+                    print(zvalue)
+                    callCovfefe(xvalue,yvalue,zvalue)
+
+
+
 
 
 
@@ -229,7 +243,7 @@ class RecordPage(tk.Frame):
                 button4.pack()
 
 
-                button5 = ttk.Button(self, text = "Previous page", command = lambda: controller.show_frame(PageOne))
+                button5 = ttk.Button(self, text = "Previous page", command = lambda: controller.show_frame(RecordPage))
 
                 button6 = ttk.Button(self, text = "Return to main page", command = lambda: controller.show_frame(HomePage))
                 button6.pack()
@@ -252,10 +266,10 @@ class FinalizeTrackPage(tk.Frame):
                 tk.Frame.__init__(self, parent)
                 label = tk.Label(self, text = "Finalize the current track", font = LARGE_FONT)
 
-                button1 = ttk.Button(self, text = "Add track to song", command = lambda: controller.show_frame(TrackPage))
+                button1 = ttk.Button(self, text = "Add track to song", command = lambda: controller.show_frame(HomePage))
                 button1.pack()
 
-                button2 = ttk.Button(self, text = "Discard track", command = lambda: controller.show_frame(PageOne))
+                button2 = ttk.Button(self, text = "Discard track", command = lambda: controller.show_frame(HomePage))
                 button2.pack()
 
 
@@ -288,15 +302,19 @@ class HomePage(tk.Frame):
                 label.pack(pady = 10, padx = 10)
 
                 #For Home button
-                button1 = ttk.Button(self, text = "Return to Home", command = lambda:  controller.show_frame(StartPage))
-                button1.pack()
 
-                button2 = ttk.Button(self, text = "Start new song", command = lambda: controller.show_frame(RecordPage))
+
+                button2 = ttk.Button(self, text = "Play Current Song", command = playSong)
                 button2.pack()
 
-                button3 = ttk.Button(self, text = "Add track to current song", command = lambda: controller.show_frame(PageOne))
+                button3 = ttk.Button(self, text = "Add track to current song", command = lambda: controller.show_frame(RecordPage))
                 button3.pack()
 
+                button4 = ttk.Button(self, text = "Export track")
+                button4.pack()
+
+                button1 = ttk.Button(self, text = "Return to Home", command = lambda:  controller.show_frame(StartPage))
+                button1.pack()
 
 
 

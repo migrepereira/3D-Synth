@@ -5,13 +5,7 @@ import scipy.io.wavfile as radio
 import os
 import math
 
-def callCovfefe():
-
-    x = int(input("x value: "))
-
-    y = int(input("y value: "))
-
-    z = int(input("z value: "))
+def callCovfefe(x,y,z):
 
     print('Calculating distance from source...')
     d = math.sqrt(x**2 + y**2 + z**2) #distance
