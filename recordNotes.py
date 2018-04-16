@@ -8,6 +8,9 @@ from scipy.io.wavfile import write
 #To import into new one that controls lights and sounds
 #start_time = time.time()
 
+
+
+
 def playNote(note):
     frequency = 440 * (2 ** ((note - 69)/12))
     fs = 8000
