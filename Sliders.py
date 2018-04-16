@@ -51,9 +51,7 @@ from PlayWAVFile import playWAV
 #
 #
 
-
-
-
+from covfefe import callCovfefe
 
 
 
@@ -201,6 +199,10 @@ class LocalizePage(tk.Frame):
                 button6 = ttk.Button(self, text = "Confirm Z", command = w3value)
                 button6.pack()
 
+                #button7 = ttk.Button(self, text = "Run")
+                button7 = ttk.Button(self, text = "Run", command = callCovfefe)
+                button7.pack()
+
 
 
 
@@ -211,11 +213,14 @@ class RecordPage(tk.Frame):
                 label = tk.Label(self, text = "Record a new track for your song!", font = LARGE_FONT)
                 label.pack(pady = 10, padx = 10)
 
-                button1 = ttk.Button(self, text = "Record", command = runRecord)
+                button1 = ttk.Button(self, text = "Record SIN", command = recordSIN)
                 button1.pack()
 
-                button2 = ttk.Button(self, text = "Stop")
+                button2 = ttk.Button(self, text = "Record SQUARE", command = recordSQUARE)
                 button2.pack()
+
+                button7 = ttk.Button(self, text = "Record SAW", command = recordSAW)
+                button7.pack()
 
                 button3 = ttk.Button(self, text = "Playback track", command = playWAV)
                 button3.pack()
