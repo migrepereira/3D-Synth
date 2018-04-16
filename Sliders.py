@@ -46,6 +46,7 @@ import numpy as np
 
 
 from recordNotes import *
+from PlayWAVFile import playWAV
 #
 #
 #
@@ -129,7 +130,7 @@ class StartPage(tk.Frame):
                 button2 = ttk.Button(self, text = "Exit", command = quit)
                 button2.pack()
 
-                
+
 
                 #homeImage = ImageTk.PhotoImage(Image.open("homepicture.jpg"))
 
@@ -145,7 +146,7 @@ class LocalizePage(tk.Frame):
 
 
 
-  
+
         def __init__(self, parent, controller):
                 tk.Frame.__init__(self, parent)
                 label = tk.Label(self, text = "Using the X, Y, and Z sliders to localize your track in 3D space", font = LARGE_FONT)
@@ -159,7 +160,7 @@ class LocalizePage(tk.Frame):
 
                 button3 = ttk.Button(self, text = "Done", command = lambda: controller.show_frame(FinalizeTrackPage))
                 button3.pack()
-        
+
                 xvalue = None
                 yvalue = None
                 zvalue = None
@@ -175,24 +176,24 @@ class LocalizePage(tk.Frame):
                         print(zvalue)
 
 
-                
+
                 w1 = Scale(self, from_ = 0, to = 180, tickinterval = 30 )
                 w1.config(label = 'Y-axis')
                 w1.pack()
 
-                
+
 
                 button4 = ttk.Button(self, text = "Confirm Y", command = w1value)
                 button4.pack()
 
- 
+
                 w2 = Scale(self, from_=0, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
                 w2.config(label = 'X-axis')
                 w2.pack()
 
                 button5 = ttk.Button(self, text = "Confirm X", command = w2value)
                 button5.pack()
-                
+
                 w3 = Scale(self, from_=0, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
                 w3.config(label = 'Z-axis')
                 w3.pack()
@@ -200,7 +201,7 @@ class LocalizePage(tk.Frame):
                 button6 = ttk.Button(self, text = "Confirm Z", command = w3value)
                 button6.pack()
 
-      
+
 
 
 class RecordPage(tk.Frame):
@@ -216,19 +217,19 @@ class RecordPage(tk.Frame):
                 button2 = ttk.Button(self, text = "Stop")
                 button2.pack()
 
-                button3 = ttk.Button(self, text = "Playback track")
+                button3 = ttk.Button(self, text = "Playback track", command = playWAV)
                 button3.pack()
 
                 button4 = ttk.Button(self, text = "Localize track", command = lambda: controller.show_frame(LocalizePage))
                 button4.pack()
 
-                
+
                 button5 = ttk.Button(self, text = "Previous page", command = lambda: controller.show_frame(PageOne))
 
                 button6 = ttk.Button(self, text = "Return to main page", command = lambda: controller.show_frame(HomePage))
                 button6.pack()
 
-                
+
                 canvas = FigureCanvasTkAgg(f, self)
                 canvas.show()
                 canvas.get_tk_widget().pack(side = tk.BOTTOM, fill = tk.BOTH, expand = True)
@@ -252,7 +253,7 @@ class FinalizeTrackPage(tk.Frame):
                 button2 = ttk.Button(self, text = "Discard track", command = lambda: controller.show_frame(PageOne))
                 button2.pack()
 
-                
+
 
 class TrackPage(tk.Frame):
         def __init__(self, parent, controller):
@@ -291,8 +292,8 @@ class HomePage(tk.Frame):
                 button3 = ttk.Button(self, text = "Add track to current song", command = lambda: controller.show_frame(PageOne))
                 button3.pack()
 
-                
- 
+
+
 
 
 class PageOne(tk.Frame):
@@ -314,19 +315,3 @@ class PageOne(tk.Frame):
 app = ThreeDSynth()
 ani = animation.FuncAnimation(f, animate, interval = 1000)
 app.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
-
