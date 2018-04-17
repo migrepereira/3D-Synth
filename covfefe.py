@@ -15,10 +15,23 @@ def callCovfefe():
 
     print('Calculating distance from source...')
     d = math.sqrt(x**2 + y**2 + z**2) #distance
+
     print('Calclating azimuth angle...')
-    a = np.degrees(np.arctan(x / y)) #azimuth
+    if y == 0:
+        if x > 0:
+            a = 90
+        elif x < 0:
+            a = -90
+        else:
+            a = 0
+    else:
+        a = np.degrees(np.arctan(x / y)) #azimuth
+
     print('Calculating elevation...')
-    e = np.degrees(np.arcsin(y / d)) #elevation
+    if d == 0:
+        e = 0
+    else:
+        e = np.degrees(np.arcsin(y / d)) #elevation
 
     '''
     DEFINING THE AZIMUTHS AND ELEVATIONS USED IN THE CIPIC DATABASE
@@ -53,7 +66,13 @@ def callCovfefe():
     a_index = 0
 
     while a_index < 25:
-        if  Ca[a_index] < a and a < Ca[a_index + 1]:
+        if a < Ca[0]:
+            a_index = 0
+            break
+        elif a > Ca[24]:
+            a_index = 24
+            break
+        elif  Ca[a_index] < a and a < Ca[a_index + 1]:
             break
         elif a == Ca[a_index]:
             break
@@ -65,6 +84,7 @@ def callCovfefe():
             continue
         else:
             a_index = 24
+
 
     if abs(Ca[a_index - 1] - a) < abs(Ca[a_index] - a):
         a_index -= 1
@@ -158,12 +178,36 @@ def callCovfefe():
 
     print('Writing track to file...')
 
+    print('★░░░░░░░░░░░████░░░░░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░███░██░░░░░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░██░░░█░░░░░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░██░░░██░░░░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░░██░░░███░░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░░░██░░░░██░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░░░██░░░░░███░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░░░░██░░░░░░██░░░░░░░░░░░░░★')
+    print('★░░░░░░░███████░░░░░░░██░░░░░░░░░░░░★')
+    print('★░░░░█████░░░░░░░░░░░░░░███░██░░░░░░★')
+    print('★░░░██░░░░░████░░░░░░░░░░██████░░░░░★        S U C C E S S')
+    print('★░░░██░░████░░███░░░░░░░░░░░░░██░░░░★')
+    print('★░░░██░░░░░░░░███░░░░░░░░░░░░░██░░░░★')
+    print('★░░░░██████████░███░░░░░░░░░░░██░░░░★')
+    print('★░░░░██░░░░░░░░████░░░░░░░░░░░██░░░░★')
+    print('★░░░░███████████░░██░░░░░░░░░░██░░░░★')
+    print('★░░░░░░██░░░░░░░████░░░░░██████░░░░░★')
+    print('★░░░░░░██████████░██░░░░███░██░░░░░░★')
+    print('★░░░░░░░░░██░░░░░████░███░░░░░░░░░░░★')
+    print('★░░░░░░░░░█████████████░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░★')
+
     filename = input("Name your track: ")
     filename = filename + '.wav'
 
 
-    radio.write(filename, fs, audio_in)
+    radio.write(filename, fs, track)
 
     print('Your track ' + filename + ' is done!')
+
+    os.system('start ' + filename)
 
 
