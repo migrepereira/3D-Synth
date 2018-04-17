@@ -24,7 +24,7 @@ def playNote(note, velocity, mode, on):
     if on is True:
         frequency = 440 * (2 ** ((note - 69)/12))
         fs = 44100
-        duration = 10
+        duration = 2
         vol = 1000*(velocity/127)
 
         t = np.linspace(0, duration, duration * fs)
@@ -39,7 +39,7 @@ def playNote(note, velocity, mode, on):
         #pygame.mixer.pre_init(fs, size=-16, channels=1)
         #pygame.mixer.init()
         sound = pygame.sndarray.make_sound(x)
-        channel.play(sound)
+        channel.play(sound, -1, -1, 0)
     else:
         channel.stop()
 
