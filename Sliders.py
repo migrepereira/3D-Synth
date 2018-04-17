@@ -53,11 +53,13 @@ from playSongFile import playSong
 #
 
 from covfefe import callCovfefe
+from mixTracks import addToSong
 
 
 
-
-
+xvalue = 0
+yvalue = 0
+zvalue = 0
 
 
 LARGE_FONT = ("Verdana", 12)
@@ -160,21 +162,17 @@ class LocalizePage(tk.Frame):
                 def test():
                     print("localizing track at:")
                     print("x:")
-                    print(xvalue)
+                    print(w1.get())
                     print("y:")
-                    print(yvalue)
+                    print(w2.get())
                     print("z:")
-                    print(zvalue)
-                    #callCovfefe(xvalue,yvalue,zvalue)
+                    print(w3.get())
+                    #callCovfefe(w1.get(),w2.get(),w3.get())
                     controller.show_frame(FinalizeTrackPage)
 
 
                 button3 = ttk.Button(self, text = "Done", command = test)
                 button3.pack()
-
-                xvalue = 0
-                yvalue = 0
-                zvalue = 0
 
                 def w1value():
                         yvalue = w1.get()
@@ -270,7 +268,11 @@ class FinalizeTrackPage(tk.Frame):
                 tk.Frame.__init__(self, parent)
                 label = tk.Label(self, text = "Finalize the current track", font = LARGE_FONT)
 
-                button1 = ttk.Button(self, text = "Add track to song", command = lambda: controller.show_frame(HomePage))
+                def addTrackToSong():
+                    addToSong
+                    controller.show_frame(HomePage)
+
+                button1 = ttk.Button(self, text = "Add track to song", command = addToSong)
                 button1.pack()
 
                 button2 = ttk.Button(self, text = "Discard track", command = lambda: controller.show_frame(HomePage))
@@ -307,6 +309,8 @@ class HomePage(tk.Frame):
 
                 #For Home button
 
+                button5 = ttk.Button(self, text = "Start New Song")
+                button5.pack()
 
                 button2 = ttk.Button(self, text = "Play Current Song", command = playSong)
                 button2.pack()
