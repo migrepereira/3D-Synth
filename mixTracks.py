@@ -3,7 +3,8 @@ import wave
 import contextlib
 
 def addToSong():
-    fname = 'mySong.wav'
+    print("Combining Tracks")
+    fname = 'A.wav'
     with contextlib.closing(wave.open(fname,'r')) as f:
         frames = f.getnframes()
         rate = f.getframerate()
@@ -20,9 +21,9 @@ def addToSong():
     sound2 = AudioSegment.from_file("recoredSong.wav")
 
     if(currentSongLength > trackLength):
-        combined = sound2.overlay(sound1)
-    else:
-        print("Track length was longer")
         combined = sound1.overlay(sound2)
-
-    combined.export("myNewSong.wav", format='wav')
+    else:
+        combined = sound2.overlay(sound1)
+    print("Exporting")
+    combined.export("mySong.wav", format='wav')
+    print("Track combined succesfully")
