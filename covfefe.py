@@ -130,7 +130,7 @@ def callCovfefe(x,y,z):
     '''
     RADIO
     '''
-    sound = radio.read('sample.wav')
+    sound = radio.read('recoredSong.wav')
 
     fs = sound[0] #fs means sample rate is an int
     audio_in = sound[1] #a 2D integer array

@@ -48,14 +48,10 @@ import numpy as np
 from recordNotes import *
 from PlayWAVFile import playWAV
 from playSongFile import playSong
-#
-#
-#
-
 from covfefe import callCovfefe
 from mixTracks import addToSong
-
-
+from ResetMySong import resetSong
+from ResetMySong import exportSong
 
 xvalue = 0
 yvalue = 0
@@ -153,13 +149,10 @@ class LocalizePage(tk.Frame):
                 label = tk.Label(self, text = "Using the X, Y, and Z sliders to localize your track in 3D space", font = LARGE_FONT)
                 label.pack(pady = 10, padx = 10)
 
-                button1 = tk.Button(self, text = "Play")
-                button1.pack()
-
                 #button2 = ttk.Button(self, text = "Stop")
                 #button2.pack()
 
-                def test():
+                def submitTrack():
                     print("localizing track at:")
                     print("x:")
                     print(w1.get())
@@ -170,8 +163,22 @@ class LocalizePage(tk.Frame):
                     #callCovfefe(w1.get(),w2.get(),w3.get())
                     controller.show_frame(FinalizeTrackPage)
 
+                def playLocalTrack():
+                    print("localizing track at:")
+                    print("x:")
+                    print(w1.get())
+                    print("y:")
+                    print(w2.get())
+                    print("z:")
+                    print(w3.get())
+                    #callCovfefe(w1.get(),w2.get(),w3.get())
+                    playWAV()
 
-                button3 = tk.Button(self, text = "Done", command = test)
+
+                button1 = tk.Button(self, text = "Play", command = playLocalTrack)
+                button1.pack()
+
+                button3 = tk.Button(self, text = "Done", command = submitTrack)
                 button3.pack()
 
                 def w1value():
@@ -191,31 +198,23 @@ class LocalizePage(tk.Frame):
                 w1.pack()
 
 
-
-                button4 = tk.Button(self, text = "Confirm Y", command = w1value)
-                button4.pack()
+                #button4 = tk.Button(self, text = "Confirm Y", command = w1value)
+                #button4.pack()
 
 
                 w2 = Scale(self, from_=0, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
                 w2.config(label = 'X-axis')
                 w2.pack()
 
-                button5 = tk.Button(self, text = "Confirm X", command = w2value)
-                button5.pack()
+                #button5 = tk.Button(self, text = "Confirm X", command = w2value)
+                #button5.pack()
 
                 w3 = Scale(self, from_=0, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
                 w3.config(label = 'Z-axis')
                 w3.pack()
 
-                button6 = tk.Button(self, text = "Confirm Z", command = w3value)
-                button6.pack()
-
-                def test():
-                    print(xvalue)
-                    print(yvalue)
-                    print(zvalue)
-                    callCovfefe(xvalue,yvalue,zvalue)
-
+                #button6 = tk.Button(self, text = "Confirm Z", command = w3value)
+                #button6.pack()
 
 
 
@@ -305,7 +304,7 @@ class HomePage(tk.Frame):
 
                 #For Home button
 
-                button5 = tk.Button(self, text = "Start New Song")
+                button5 = tk.Button(self, text = "Start New Song", command = resetSong)
                 button5.pack()
 
                 button2 = tk.Button(self, text = "Play Current Song", command = playSong)
@@ -314,7 +313,7 @@ class HomePage(tk.Frame):
                 button3 = tk.Button(self, text = "Add track to current song", command = lambda: controller.show_frame(RecordPage))
                 button3.pack()
 
-                button4 = tk.Button(self, text = "Export Song")
+                button4 = tk.Button(self, text = "Export Song", command = exportSong)
                 button4.pack()
 
                 button1 = tk.Button(self, text = "Return to Home", command = lambda:  controller.show_frame(StartPage))

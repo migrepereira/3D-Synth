@@ -4,7 +4,7 @@ import contextlib
 
 def addToSong():
     print("Combining Tracks")
-    fname = 'A.wav'
+    fname = 'mySong.wav'
     with contextlib.closing(wave.open(fname,'r')) as f:
         frames = f.getnframes()
         rate = f.getframerate()
