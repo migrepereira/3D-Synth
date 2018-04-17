@@ -22,6 +22,7 @@ def addToSong():
     if(currentSongLength > trackLength):
         combined = sound2.overlay(sound1)
     else:
+        print("Track length was longer")
         combined = sound1.overlay(sound2)
 
-    combined.export("mySong.wav", format='wav')
+    combined.export("myNewSong.wav", format='wav')

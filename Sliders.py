@@ -268,11 +268,7 @@ class FinalizeTrackPage(tk.Frame):
                 tk.Frame.__init__(self, parent)
                 label = tk.Label(self, text = "Finalize the current track", font = LARGE_FONT)
 
-                def addTrackToSong():
-                    addToSong
-                    controller.show_frame(HomePage)
-
-                button1 = ttk.Button(self, text = "Add track to song", command = addToSong)
+                button1 = ttk.Button(self, text = "Add track to song", command =  lambda: [addToSong, controller.show_frame(HomePage)])
                 button1.pack()
 
                 button2 = ttk.Button(self, text = "Discard track", command = lambda: controller.show_frame(HomePage))

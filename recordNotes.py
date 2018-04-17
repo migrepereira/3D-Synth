@@ -50,6 +50,8 @@ def readInput(input_device, mode):
     velocitiesAtThatTime = []
     velocitiesAtThatTime.append([])
 
+    startTime = time.time()
+
     loop = True
     while loop:
         if input_device.poll():
@@ -68,8 +70,9 @@ def readInput(input_device, mode):
 
                 ##Needs work obvs, probably loop to sustain or something
                 playNote(note, midiData[2], mode)
-
-                timeStamps.append(timestamp)
+                timeAdd = time.time()-startTime
+                timeAdd = timeAdd*1000
+                timeStamps.append(timeAdd)
                 currentNotes.append(note)
                 notesAtThatTime.append([])
                 for y in currentNotes:
@@ -88,7 +91,9 @@ def readInput(input_device, mode):
                 for y in currentVelocities:
                     velocitiesAtThatTime[len(velocitiesAtThatTime)-1].append(y)
                 currentNotes.remove(note)
-                timeStamps.append(timestamp)
+                timeAdd = time.time()-startTime
+                timeAdd = timeAdd*1000
+                timeStamps.append(timeAdd)
                 notesAtThatTime.append([])
                 for y in currentNotes:
                     notesAtThatTime[len(notesAtThatTime)-1].append(y)
