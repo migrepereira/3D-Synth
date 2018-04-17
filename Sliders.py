@@ -47,6 +47,7 @@ import numpy as np
 
 from recordNotes import *
 from PlayWAVFile import playWAV
+from PlayWAVFile import playSpace
 from playSongFile import playSong
 from covfefe import callCovfefe
 from mixTracks import addToSong
@@ -153,26 +154,12 @@ class LocalizePage(tk.Frame):
                 #button2.pack()
 
                 def submitTrack():
-                    print("localizing track at:")
-                    print("x:")
-                    print(w1.get())
-                    print("y:")
-                    print(w2.get())
-                    print("z:")
-                    print(w3.get())
-                    #callCovfefe(w1.get(),w2.get(),w3.get())
+                    callCovfefe(w1.get(),w2.get(),w3.get())
                     controller.show_frame(FinalizeTrackPage)
 
                 def playLocalTrack():
-                    print("localizing track at:")
-                    print("x:")
-                    print(w1.get())
-                    print("y:")
-                    print(w2.get())
-                    print("z:")
-                    print(w3.get())
-                    #callCovfefe(w1.get(),w2.get(),w3.get())
-                    playWAV()
+                    callCovfefe(w1.get(),w2.get(),w3.get())
+                    playSpace()
 
 
                 button1 = tk.Button(self, text = "Play", command = playLocalTrack)
@@ -193,18 +180,18 @@ class LocalizePage(tk.Frame):
 
 
 
-                w1 = Scale(self, from_ = 0, to = 180, tickinterval = 30 )
-                w1.config(label = 'Y-axis')
-                w1.pack()
+                w2 = Scale(self, from_ = 0, to = 180, tickinterval = 30 )
+                w2.config(label = 'Y-axis')
+                w2.pack()
 
 
                 #button4 = tk.Button(self, text = "Confirm Y", command = w1value)
                 #button4.pack()
 
 
-                w2 = Scale(self, from_=0, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
-                w2.config(label = 'X-axis')
-                w2.pack()
+                w1 = Scale(self, from_=0, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
+                w1.config(label = 'X-axis')
+                w1.pack()
 
                 #button5 = tk.Button(self, text = "Confirm X", command = w2value)
                 #button5.pack()

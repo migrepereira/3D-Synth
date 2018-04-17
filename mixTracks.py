@@ -10,7 +10,7 @@ def addToSong():
         rate = f.getframerate()
         currentSongLength = frames / float(rate)
 
-    fname = 'recoredSong.wav'
+    fname = 'spatializedTrack.wav'
     with contextlib.closing(wave.open(fname,'r')) as f:
         frames = f.getnframes()
         rate = f.getframerate()
@@ -18,7 +18,7 @@ def addToSong():
 
     sound1 = AudioSegment.from_file("mySong.wav")
     ####CHANGE TO localizedSong.wav when covfefe is working
-    sound2 = AudioSegment.from_file("recoredSong.wav")
+    sound2 = AudioSegment.from_file("spatializedTrack.wav")
 
     if(currentSongLength > trackLength):
         combined = sound1.overlay(sound2)

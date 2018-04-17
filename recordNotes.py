@@ -68,16 +68,11 @@ def readInput(input_device, mode):
             midiData = event[0][0]
             note = midiData[1]
 
-            #######THIS NEEDS TO CHANGE RIGHT NOW CANT RECORD MORE THAN ONE THING
-            #Start time needs to be recorded and it needs to subtract the difference
-            #Because right now the next recording wouldn't start at zero, it would start after the first one ends
-            #timestamp = event[0][1]
 
             ##KEVIN: Change the 0 in both of these input statements to what your MIDI
             ##Keyboard returns when you release a note to play yours
             if(midiData[2] is not 0 and note is not 120):
 
-                ##Needs work obvs, probably loop to sustain or something
                 playNote(note, midiData[2], mode, True)
                 timeAdd = time.time()-startTime
                 timeAdd = timeAdd*1000

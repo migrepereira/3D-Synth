@@ -7,6 +7,15 @@ import math
 
 def callCovfefe(x,y,z):
 
+    print("Localizing track at:")
+    print("x:")
+    print(x)
+    print("y:")
+    print(y)
+    print("z:")
+    print(z)
+    print("---------------------------")
+
     print('Calculating distance from source...')
     d = math.sqrt(x**2 + y**2 + z**2) #distance
 
@@ -163,8 +172,8 @@ def callCovfefe(x,y,z):
     left_array = np.asarray(lft_list)
     right_array = np.asarray(rgt_list)
 
-    wav_left = np.convolve(left_array, audio_in[:,0])
-    wav_right = np.convolve(right_array, audio_in[:,0])
+    wav_left = np.convolve(left_array, audio_in[0])
+    wav_right = np.convolve(right_array, audio_in[0])
 
     track = np.asarray([wav_left, wav_right])
 
@@ -172,10 +181,33 @@ def callCovfefe(x,y,z):
 
     print('Writing track to file...')
 
-    filename = spatializedTrack + '.wav'
+    print('★░░░░░░░░░░░████░░░░░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░███░██░░░░░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░██░░░█░░░░░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░██░░░██░░░░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░░██░░░███░░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░░░██░░░░██░░░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░░░██░░░░░███░░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░░░░██░░░░░░██░░░░░░░░░░░░░★')
+    print('★░░░░░░░███████░░░░░░░██░░░░░░░░░░░░★')
+    print('★░░░░█████░░░░░░░░░░░░░░███░██░░░░░░★')
+    print('★░░░██░░░░░████░░░░░░░░░░██████░░░░░★        S U C C E S S')
+    print('★░░░██░░████░░███░░░░░░░░░░░░░██░░░░★')
+    print('★░░░██░░░░░░░░███░░░░░░░░░░░░░██░░░░★')
+    print('★░░░░██████████░███░░░░░░░░░░░██░░░░★')
+    print('★░░░░██░░░░░░░░████░░░░░░░░░░░██░░░░★')
+    print('★░░░░███████████░░██░░░░░░░░░░██░░░░★')
+    print('★░░░░░░██░░░░░░░████░░░░░██████░░░░░★')
+    print('★░░░░░░██████████░██░░░░███░██░░░░░░★')
+    print('★░░░░░░░░░██░░░░░████░███░░░░░░░░░░░★')
+    print('★░░░░░░░░░█████████████░░░░░░░░░░░░░★')
+    print('★░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░★')
 
-    radio.write(filename, fs, track)
+    filename = 'spatializedTrack.wav'
 
-    print('Localization Complete')
+
+    radio.write(filename, fs, audio_in)
+
+    print('Your track ' + filename + ' is done!')
 
     os.system('start ' + filename)
