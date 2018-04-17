@@ -6,7 +6,7 @@ from scipy.io.wavfile import write
 from scipy import signal
 
 ##Need to change so this like loops on a short interval. Also add Kev's different WAVs
-def playNote(note, velocity, mode):
+def playNote(note, velocity, mode, on):
     #Old method
     #frequency = 440 * (2 ** ((note - 69)/12))
     #fs = 8000
@@ -19,24 +19,29 @@ def playNote(note, velocity, mode):
     #sound = pygame.sndarray.make_sound(x)
     #sound.play()
 
-    frequency = 440 * (2 ** ((note - 69)/12))
-    fs = 44100
-    duration = 1
-    vol = 1000*(velocity/127)
+    channel = pygame.mixer.Channel(note)
 
-    t = np.linspace(0, duration, duration * fs)
-    if mode is "SIN":
-        data = np.sin(2 * np.pi * frequency * t) * vol
-    elif mode is "SQUARE":
-        data = signal.square(2 * np.pi * frequency * t) * vol
-    elif mode is "SAW":
-        data = signal.sawtooth(2 * np.pi * frequency * t) * vol
-    x = data.astype(np.int16)
+    if on is True:
+        frequency = 440 * (2 ** ((note - 69)/12))
+        fs = 44100
+        duration = 10
+        vol = 1000*(velocity/127)
 
-    pygame.mixer.pre_init(fs, size=-16, channels=1)
-    pygame.mixer.init()
-    sound = pygame.sndarray.make_sound(x)
-    sound.play()
+        t = np.linspace(0, duration, duration * fs)
+        if mode is "SIN":
+            data = np.sin(2 * np.pi * frequency * t) * vol
+        elif mode is "SQUARE":
+            data = signal.square(2 * np.pi * frequency * t) * vol
+        elif mode is "SAW":
+            data = signal.sawtooth(2 * np.pi * frequency * t) * vol
+        x = data.astype(np.int16)
+
+        #pygame.mixer.pre_init(fs, size=-16, channels=1)
+        #pygame.mixer.init()
+        sound = pygame.sndarray.make_sound(x)
+        channel.play(sound)
+    else:
+        channel.stop()
 
 def readInput(input_device, mode):
 
@@ -45,6 +50,10 @@ def readInput(input_device, mode):
     notesAtThatTime = []
     timeStamps.append(0)
     notesAtThatTime.append([])
+
+    pygame.mixer.pre_init(44100, size=-16, channels=1)
+    pygame.mixer.init()
+    pygame.mixer.set_num_channels(120)
 
     currentVelocities = []
     velocitiesAtThatTime = []
@@ -62,14 +71,14 @@ def readInput(input_device, mode):
             #######THIS NEEDS TO CHANGE RIGHT NOW CANT RECORD MORE THAN ONE THING
             #Start time needs to be recorded and it needs to subtract the difference
             #Because right now the next recording wouldn't start at zero, it would start after the first one ends
-            timestamp = event[0][1]
+            #timestamp = event[0][1]
 
             ##KEVIN: Change the 0 in both of these input statements to what your MIDI
             ##Keyboard returns when you release a note to play yours
             if(midiData[2] is not 0 and note is not 120):
 
                 ##Needs work obvs, probably loop to sustain or something
-                playNote(note, midiData[2], mode)
+                playNote(note, midiData[2], mode, True)
                 timeAdd = time.time()-startTime
                 timeAdd = timeAdd*1000
                 timeStamps.append(timeAdd)
@@ -81,10 +90,11 @@ def readInput(input_device, mode):
                 velocitiesAtThatTime.append([])
                 for y in currentVelocities:
                     velocitiesAtThatTime[len(velocitiesAtThatTime)-1].append(y)
-                print(timestamp)
+                #print(timestamp)
                 print(notesAtThatTime[(len(notesAtThatTime)-1)])
-                print(velocitiesAtThatTime[(len(velocitiesAtThatTime)-1)])
+                #print(velocitiesAtThatTime[(len(velocitiesAtThatTime)-1)])
             if(midiData[2] is 0 and note is not 120):
+                playNote(note, midiData[2], mode, False)
                 index = currentNotes.index(note)
                 currentVelocities.remove(currentVelocities[index])
                 velocitiesAtThatTime.append([])
@@ -97,9 +107,9 @@ def readInput(input_device, mode):
                 notesAtThatTime.append([])
                 for y in currentNotes:
                     notesAtThatTime[len(notesAtThatTime)-1].append(y)
-                print(timestamp)
+                #print(timestamp)
                 print(notesAtThatTime[(len(notesAtThatTime)-1)])
-                print(velocitiesAtThatTime[(len(velocitiesAtThatTime)-1)])
+                #print(velocitiesAtThatTime[(len(velocitiesAtThatTime)-1)])
 
             if (note is 120 and midiData[2] is 0):
                 writeWAVFile(timeStamps, notesAtThatTime, velocitiesAtThatTime, mode)
@@ -133,7 +143,7 @@ def writeWAVFile(timeStamps, notesAtThatTime, velocitiesAtThatTime, mode):
             vel = 1000*(vel/127)
             freq = 440 * (2 ** ((i - 69)/12))
             addition = noteAdd(freq, duration, vel, rate, mode)
-            silence = silence + addition;
+            silence = silence + addition
         song = np.concatenate((song, silence), axis = 0)
 
         print("------\nnotes")
@@ -164,5 +174,5 @@ def recordSQUARE():
 
 if __name__ == '__main__':
     pygame.midi.init()
-    my_input = pygame.midi.Input(0, "SIN")
-    readInput(my_input)
+    my_input = pygame.midi.Input(0)
+    readInput(my_input, "SQUARE")
