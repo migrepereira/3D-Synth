@@ -26,4 +26,4 @@ def addToSong():
         combined = sound2.overlay(sound1)
     print("Exporting")
     combined.export("mySong.wav", format='wav')
-    print("Track combined succesfully")
+    print("Tracks combined succesfully")
