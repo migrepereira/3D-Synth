@@ -213,7 +213,9 @@ class RecordPage(tk.Frame):
         def __init__(self,parent, controller):
                 tk.Frame.__init__(self,parent)
                 label = tk.Label(self, text = "Record a new track for your song!", font = LARGE_FONT)
+                label2 = tk.Label(self, text = "Select a wave type to start, and press the \'h\' key when done!", font = LARGE_FONT)
                 label.pack(pady = 10, padx = 10)
+                label2.pack(pady = 10, padx = 10)
 
                 button1 = tk.Button(self, text = "Record SIN", command = recordSIN)
                 button1.pack()
