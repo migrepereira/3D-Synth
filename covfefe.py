@@ -2,8 +2,10 @@ import numpy as np
 import scipy as sp
 import scipy.io as spio
 import scipy.io.wavfile as radio
+from scipy.signal import lfilter
 import os
 import math
+from pydub import AudioSegment
 
 def callCovfefe(x,y,z):
 
@@ -16,11 +18,15 @@ def callCovfefe(x,y,z):
     print(z)
     print("---------------------------")
 
+    if (z < 0):
+        z *= -1
+        # -z's were not working so we will take advantage of the cone of confusion
+
     print('Calculating distance from source...')
     d = math.sqrt(x**2 + y**2 + z**2) #distance
 
     print('Calclating azimuth angle...')
-    if y == 0:
+    if z == 0: #####Changed to Z
         if x > 0:
             a = 90
         elif x < 0:
@@ -28,17 +34,13 @@ def callCovfefe(x,y,z):
         else:
             a = 0
     else:
-        a = np.degrees(np.arctan(x / y)) #azimuth
+        a = np.degrees(np.arctan(x / z)) #azimuth #######Changed to Z
 
     print('Calculating elevation...')
     if d == 0:
         e = 0
     else:
         e = np.degrees(np.arcsin(y / d)) #elevation
-
-    '''
-    DEFINING THE AZIMUTHS AND ELEVATIONS USED IN THE CIPIC DATABASE
-    '''
 
     #initialize a list with all of the azimuths used in the CIPIC database (Ca = CIPIC azimuths)
     print('Constructing database...')
@@ -60,13 +62,8 @@ def callCovfefe(x,y,z):
     while i <= 49:
         Ce.append(-45 + 5.625 * i)
         i += 1
-
-
-    '''
-    FINDING THE CLOSEST AZIMUTH AND ELEVATION FROM THE CIPIC DATABASE TO MATCH THE USER'S SELECTED LOCATION
-    '''
-    print('Comparing...')
     a_index = 0
+
 
     while a_index < 25:
         if a < Ca[0]:
@@ -92,13 +89,15 @@ def callCovfefe(x,y,z):
     if abs(Ca[a_index - 1] - a) < abs(Ca[a_index] - a):
         a_index -= 1
 
-    print('Azimuth index found.')
-
-
     e_index = 0
-
     while e_index < 50:
-        if  Ce[e_index] < e and e < Ce[e_index + 1]:
+        if e < Ce[0]:
+            e_index = 0
+            break
+        elif e > Ce[49]:
+            e_index = 50
+            break
+        elif  Ce[e_index] < e and e < Ce[e_index + 1]:
             break
         elif e == Ce[e_index]:
             break
@@ -111,15 +110,13 @@ def callCovfefe(x,y,z):
         else:
             e_index = 49
 
+    print(a)
+    print(e)
+    print(Ce[e_index])
+
     if abs(Ce[e_index - 1] - e) < abs(Ce[e_index] - e):
         e_index -= 1
 
-    print('Elevation index found.')
-
-
-    '''
-    USES A_INDEX AND E_INDEX TO FIND RELEVANT INFORMATION FROM THE CIPIC DATABASE
-    '''
     print('Finding CIPIC profile...')
 
     C58 = spio.loadmat('CIPIC_58.mat', squeeze_me=True)
@@ -132,82 +129,46 @@ def callCovfefe(x,y,z):
     lft = hrir_l[a_index][e_index] #gives you a bunch of float64
     rgt = hrir_r[a_index][e_index]
 
-    print(lft)
     print('Calculating Interaural Time Delay (ITD)...')
 
-
-    '''
-    RADIO
-    '''
     sound = radio.read('recoredSong.wav')
 
     fs = sound[0] #fs means sample rate is an int
     audio_in = sound[1] #a 2D integer array
 
-    print(audio_in)
-
-    lft_list = [] #a list of values in the left and right channels
-    rgt_list = [] #lists are easier to edit and add values to, which will become useful when adding the delay
-
     print('Appending data to list...')
 
-    for i in range(0,200):
-        lft_list.append(lft[i])
-        rgt_list.append(rgt[i])
-        i += 1
+    lft_list = list(audio_in)
+    rgt_list = list(audio_in)
+
+
+    print('Creating delay...')
+    delay = int(round(ITD[a_index][e_index]))
 
     if a_index < 13: #sound is coming from the left
-        for i in range(0, 15): #15 is a sample delay?
+        for i in range(0, delay):
             lft_list.append(0)
             rgt_list.insert(0, 0)
-            i += 1
-        #add zeros to beginning of right and end of left
+            #add zeros to beginning of right and end of left
     else:
-        for i in range(0, 15):
+        for i in range(0, delay):
             lft_list.insert(0, 0)
             rgt_list.append(0)
             #add zeros to end of right and beginning of left
 
+    wav_left = lfilter(lft, 1.0, audio_in)
+    wav_right = lfilter(rgt, 1.0, audio_in)
 
-    left_array = np.asarray(lft_list)
-    right_array = np.asarray(rgt_list)
-
-    wav_left = np.convolve(left_array, audio_in[0])
-    wav_right = np.convolve(right_array, audio_in[0])
-
-    track = np.asarray([wav_left, wav_right])
-
-    wav_left = np.asarray(wav_left)
-
-    print('Writing track to file...')
-
-    print('★░░░░░░░░░░░████░░░░░░░░░░░░░░░░░░░░★')
-    print('★░░░░░░░░░███░██░░░░░░░░░░░░░░░░░░░░★')
-    print('★░░░░░░░░░██░░░█░░░░░░░░░░░░░░░░░░░░★')
-    print('★░░░░░░░░░██░░░██░░░░░░░░░░░░░░░░░░░★')
-    print('★░░░░░░░░░░██░░░███░░░░░░░░░░░░░░░░░★')
-    print('★░░░░░░░░░░░██░░░░██░░░░░░░░░░░░░░░░★')
-    print('★░░░░░░░░░░░██░░░░░███░░░░░░░░░░░░░░★')
-    print('★░░░░░░░░░░░░██░░░░░░██░░░░░░░░░░░░░★')
-    print('★░░░░░░░███████░░░░░░░██░░░░░░░░░░░░★')
-    print('★░░░░█████░░░░░░░░░░░░░░███░██░░░░░░★')
-    print('★░░░██░░░░░████░░░░░░░░░░██████░░░░░★        S U C C E S S')
-    print('★░░░██░░████░░███░░░░░░░░░░░░░██░░░░★')
-    print('★░░░██░░░░░░░░███░░░░░░░░░░░░░██░░░░★')
-    print('★░░░░██████████░███░░░░░░░░░░░██░░░░★')
-    print('★░░░░██░░░░░░░░████░░░░░░░░░░░██░░░░★')
-    print('★░░░░███████████░░██░░░░░░░░░░██░░░░★')
-    print('★░░░░░░██░░░░░░░████░░░░░██████░░░░░★')
-    print('★░░░░░░██████████░██░░░░███░██░░░░░░★')
-    print('★░░░░░░░░░██░░░░░████░███░░░░░░░░░░░★')
-    print('★░░░░░░░░░█████████████░░░░░░░░░░░░░★')
-    print('★░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░★')
+    track = np.array([wav_left, wav_right]).T.astype(np.int16)
 
     filename = 'spatializedTrack.wav'
+    radio.write(filename, fs, track)
+
+    print('Adding distance...')
+    sound = AudioSegment.from_file("spatializedTrack.wav")
+    if (d>0):
+        sound = sound - math.log(d, 2)*6
+    sound.export('spatializedTrack.wav', format='wav')
 
 
-    radio.write(filename, fs, audio_in)
-
-    print('Your track ' + filename + ' is done!')
-
-    os.system('start ' + filename)
+    print('Writing track to file...')

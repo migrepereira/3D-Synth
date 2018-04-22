@@ -180,7 +180,7 @@ class LocalizePage(tk.Frame):
 
 
 
-                w2 = Scale(self, from_ = -180, to = 180, length=300, tickinterval = 30 )
+                w2 = Scale(self, from_ = 10, to = -10, length=300, tickinterval = 1 )
                 w2.config(label = 'Y-axis')
                 w2.pack()
 
@@ -189,14 +189,14 @@ class LocalizePage(tk.Frame):
                 #button4.pack()
 
 
-                w1 = Scale(self, from_=-180, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
+                w1 = Scale(self, from_=-10, to=10, length=600,tickinterval=1, orient=HORIZONTAL)
                 w1.config(label = 'X-axis')
                 w1.pack()
 
                 #button5 = tk.Button(self, text = "Confirm X", command = w2value)
                 #button5.pack()
 
-                w3 = Scale(self, from_=-180, to=180, length=600,tickinterval=30, orient=HORIZONTAL)
+                w3 = Scale(self, from_=-10, to=10, length=600,tickinterval=1, orient=HORIZONTAL)
                 w3.config(label = 'Z-axis')
                 w3.pack()
 
