@@ -22,10 +22,11 @@ localize track.
 "pip3 install <library name>" in terminal. The libraries you will need to have
 installed with this method include:
 ############## LIBRARIES NEEDED TO DOWNLOAD
+
 Another package you will need to have installed is ffmpeg. If you're on a mac
 and using homebrew, this can easily be installed with "brew install ffmpeg".
 If you aren't, here are instillation instructions:
-https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg
+https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg.
 This is just used when exporting the track out to an MP3. If you don't have it,
 the final song will be "mySong.wav" in the directory
 
@@ -53,8 +54,11 @@ Common errors:
 
 Every once in a while, memory allocation errors happen and it crashes. Just
 restart the program, your progress will be saved.
+
 If you're getting the "rainbow wheel of death" while recording, that's ok, the
 program is doing a lot to render the sound live while it also writes a WAV file.
 It should go away when you stop recording.
+
 Missing modules means a library wasn't properly installed.
+
 Most errors should go away if you just restart the program
