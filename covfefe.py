@@ -18,13 +18,13 @@ def callCovfefe(x,y,z):
     print(z)
     print("---------------------------")
 
+    negZ = False
     if (z < 0):
+        negZ = True
         z *= -1
-        # -z's were not working so we will take advantage of the cone of confusion
 
     print('Calculating distance from source...')
     d = math.sqrt(x**2 + y**2 + z**2) #distance
-
     print('Calclating azimuth angle...')
     if z == 0: #####Changed to Z
         if x > 0:
@@ -89,6 +89,9 @@ def callCovfefe(x,y,z):
     if abs(Ca[a_index - 1] - a) < abs(Ca[a_index] - a):
         a_index -= 1
 
+    if (negZ):
+        e = 180-e
+
     e_index = 0
     while e_index < 50:
         if e < Ce[0]:
@@ -109,10 +112,6 @@ def callCovfefe(x,y,z):
             continue
         else:
             e_index = 49
-
-    print(a)
-    print(e)
-    print(Ce[e_index])
 
     if abs(Ce[e_index - 1] - e) < abs(Ce[e_index] - e):
         e_index -= 1
@@ -168,7 +167,6 @@ def callCovfefe(x,y,z):
     sound = AudioSegment.from_file("spatializedTrack.wav")
     if (d>0):
         sound = sound - math.log(d, 2)*6
-    sound.export('spatializedTrack.wav', format='wav')
-
-
     print('Writing track to file...')
+    sound.export('spatializedTrack.wav', format='wav')
+    print('Localization succesfull!')

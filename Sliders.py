@@ -242,7 +242,9 @@ class RecordPage(tk.Frame):
                 canvas = FigureCanvasTkAgg(f, self)
                 canvas.show()
                 canvas.get_tk_widget().pack(side = tk.BOTTOM, fill = tk.BOTH, expand = True)
-
+                #This is put here so it goes after the warning that gets created from that line ^
+                print('░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░')
+                print('Welcome to 3D synth! Diagnostic information will be printed here.')
 
 ##                toolbar = NavigationToolbar2TkAgg(canvas, self)
 ##                toolbar.update()
