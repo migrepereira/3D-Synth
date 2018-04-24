@@ -22,4 +22,4 @@ def resetSong():
 
 def exportSong():
     AudioSegment.from_wav("mySong.wav").export("../mySong.mp3", format="mp3")
-    print("Export succesful! mySong.mp3 is now ready to listen to in the output folder")
+    print("Export succesful! mySong.mp3 is now ready to listen to in the same directory as 3D-Synth")
