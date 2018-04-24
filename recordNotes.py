@@ -5,6 +5,7 @@ import numpy as np
 from scipy.io.wavfile import write
 from scipy import signal
 
+
 ##Need to change so this like loops on a short interval. Also add Kev's different WAVs
 def playNote(note, velocity, mode, on):
     #Old method
@@ -149,6 +150,9 @@ def writeWAVFile(timeStamps, notesAtThatTime, velocitiesAtThatTime, mode):
 
     write('recoredSong.wav', 44100, song)
     print("recoredSong.wav was built succesfully")
+
+
+
 
 ##If it can't find MIDI device change 0 to a 1 in input
 

@@ -54,14 +54,13 @@ Once you have the app running:
 
 Currently, there are no tracks in your song. The first thing to do is to add a new track (Click on "Add track to current song").
 
-On the new track menu, select which waveform you want to use (SIN, SQUARE, or SAW) and begin playing your track on the input hardware. Once you're done recording, end the recording by either pressing H on the hardware if you're using the Launchpad Mini or by pressing the highest C if you're using a MIDI keyboard. You can click "Playback track" to hear what you recorded. Now that the track is recorded, it's time to put it in 3D space. From the menu, click "Localize Track", which will bring you to a new menu.
+On the new track menu, select which waveform you want to use (SIN, SQUARE, or SAW) and begin playing your track on the input hardware. Once you're done recording, end the recording by pressing the highest note on the keyboard. (Note, this currently has to manually be adjusted at several points in recordNotes.py for different keyboards, pretty much every 120 (the highest note) needs to be changed to whatever the MIDI input of the highest key of that input is) You can click "Playback track" to hear what you recorded. Now that the track is recorded, it's time to put it in 3D space. From the menu, click "Localize Track", which will bring you to a new menu.
 
 On this menu, you can click and drag on each of the three sliders to indicate where in space you want the track to appear (+X will appear on your right, +Y will appear above you, +Z will appear in front of you). You can test how it sounds before you commit this location by clicking "Play". Once you're satisfied with the sound of the track, click "Done" to add it to your song.
 
 To confirm your changes, click "Add track to song". Once you commit these changes, the track cannot be removed.
 
-From the main menu you can now "Start a new song" (which clears all of your recorded tracks), "Play current song" (which is all of your recorded tracks layered on top of each other), add another track ("Add track to current song"), or finish your song and export it as 'mySong.mp3'. Your track will save in the same directory as '3D-Synth'.
-
+From the main menu you can now "Start a new song" (which clears all of your recorded tracks), "Play current song" (which is all of your recorded tracks layered on top of each other), add another track ("Add track to current song"), or finish your song and export it as 'mySong.mp3'. Your track will save in the same directory as '3D-Synth' (So the desktop if that folder is in the desktop).
 
 
 Common errors:
@@ -76,3 +75,5 @@ It should go away when you stop recording.
 Missing modules means a library wasn't properly installed.
 
 Most errors should go away if you just restart the program
+
+If it says value not in list during recording just restart program

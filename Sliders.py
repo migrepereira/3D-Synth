@@ -62,21 +62,6 @@ zvalue = 0
 LARGE_FONT = ("Verdana", 12)
 style.use("ggplot")
 
-f = Figure(figsize = (5,5), dpi = 100)
-a = f.add_subplot(111)
-
-def animate(i):
-        pullData = open("sampleData.txt", "r").read()
-        dataList = pullData.split('\n')
-        xList = []
-        yList = []
-        for eachLine in dataList:
-                if len(eachLine) > 1:
-                        x, y = eachLine.split(',')
-                        xList.append(int(x))
-                        yList.append(int(y))
-        a.clear()
-        a.plot(xList, yList)
 
 
 
@@ -118,23 +103,25 @@ class StartPage(tk.Frame):
 
         def __init__(self, parent, controller):
                 #parent is name of parent class (ThreeDSynth)
-                tk.Frame.__init__(self, parent)
-                label = tk.Label(self, text = "Welcome to 3D Synth, an app that lets you create your own 3D song!", font = LARGE_FONT)
+                tk.Frame.__init__(self, parent, background = "black")
+                label = tk.Label(self, text = "Welcome to 3D Synth, an app that lets you create your own 3D song!", font = LARGE_FONT, fg = "purple", bg = "black")
                 label.pack(pady = 10, padx = 10)
 
                 button1 = tk.Button(self, text = "Get started", command = lambda:  controller.show_frame(HomePage))
+                button1.config(highlightbackground = "black")
                 button1.pack()
 
                 button2 = tk.Button(self, text = "Exit", command = quit)
+                button2.config(highlightbackground = "black")
                 button2.pack()
 
 
 
-                #homeImage = ImageTk.PhotoImage(Image.open("homepicture.jpg"))
-
-                #panel = tk.Label(self, image = homeImage)
-
-                #panel.pack(side = "bottom", fill = "both", expand = "yes")
+                image = Image.open("yee.jpg")
+                photo = ImageTk.PhotoImage(image)
+                label = Label(self, anchor = W, image = photo, justify = CENTER, borderwidth = 0)
+                label.image = photo
+                label.pack()
 
 
 
@@ -146,8 +133,8 @@ class LocalizePage(tk.Frame):
 
 
         def __init__(self, parent, controller):
-                tk.Frame.__init__(self, parent)
-                label = tk.Label(self, text = "Using the X, Y, and Z sliders to localize your track in 3D space", font = LARGE_FONT)
+                tk.Frame.__init__(self, parent, background = "black")
+                label = tk.Label(self, text = "Using the X, Y, and Z sliders to localize your track in 3D space", font = LARGE_FONT, background = "black", foreground = "white")
                 label.pack(pady = 10, padx = 10)
 
                 #button2 = ttk.Button(self, text = "Stop")
@@ -162,10 +149,10 @@ class LocalizePage(tk.Frame):
                     playSpace()
 
 
-                button1 = tk.Button(self, text = "Play", command = playLocalTrack)
+                button1 = tk.Button(self, text = "Play", command = playLocalTrack, highlightbackground = "black")
                 button1.pack()
 
-                button3 = tk.Button(self, text = "Done", command = submitTrack)
+                button3 = tk.Button(self, text = "Done", command = submitTrack, highlightbackground = "black")
                 button3.pack()
 
                 def w1value():
@@ -180,7 +167,7 @@ class LocalizePage(tk.Frame):
 
 
 
-                w2 = Scale(self, from_ = 10, to = -10, length=300, tickinterval = 1 )
+                w2 = Scale(self, from_ = 10, to = -10, length=300, tickinterval = 1, fg = "white", bg = "black")
                 w2.config(label = 'Y-axis')
                 w2.pack()
 
@@ -189,14 +176,14 @@ class LocalizePage(tk.Frame):
                 #button4.pack()
 
 
-                w1 = Scale(self, from_=-10, to=10, length=600,tickinterval=1, orient=HORIZONTAL)
+                w1 = Scale(self, from_=-10, to=10, length=600,tickinterval=1, orient=HORIZONTAL, fg = "white", bg = "black")
                 w1.config(label = 'X-axis')
                 w1.pack()
 
                 #button5 = tk.Button(self, text = "Confirm X", command = w2value)
                 #button5.pack()
 
-                w3 = Scale(self, from_=-10, to=10, length=600,tickinterval=1, orient=HORIZONTAL)
+                w3 = Scale(self, from_=-10, to=10, length=600,tickinterval=1, orient=HORIZONTAL, fg = "white", bg = "black")
                 w3.config(label = 'Z-axis')
                 w3.pack()
 
@@ -211,58 +198,65 @@ class LocalizePage(tk.Frame):
 class RecordPage(tk.Frame):
 
         def __init__(self,parent, controller):
-                tk.Frame.__init__(self,parent)
+                tk.Frame.__init__(self,parent, background = "black")
                 label = tk.Label(self, text = "Record a new track for your song!", font = LARGE_FONT)
                 label2 = tk.Label(self, text = "Select a wave type to start, and press the \'h\' key when done!", font = LARGE_FONT)
                 label.pack(pady = 10, padx = 10)
                 label2.pack(pady = 10, padx = 10)
 
-                button1 = tk.Button(self, text = "Record SIN", command = recordSIN)
+                button1 = tk.Button(self, text = "Record SIN", highlightbackground = "black", command = recordSIN)
                 button1.pack()
 
-                button2 = tk.Button(self, text = "Record SQUARE", command = recordSQUARE)
+                button2 = tk.Button(self, text = "Record SQUARE", highlightbackground = "black", command = recordSQUARE)
                 button2.pack()
 
-                button7 = tk.Button(self, text = "Record SAW", command = recordSAW)
+                button7 = tk.Button(self, text = "Record SAW", highlightbackground = "black", command = recordSAW)
                 button7.pack()
 
-                button3 = tk.Button(self, text = "Playback track", command = playWAV)
+                button3 = tk.Button(self, text = "Playback track", highlightbackground = "black", command = playWAV)
                 button3.pack()
 
-                button4 = tk.Button(self, text = "Localize track", command = lambda: controller.show_frame(LocalizePage))
+                button4 = tk.Button(self, text = "Localize track", highlightbackground = "black", command = lambda: controller.show_frame(LocalizePage))
                 button4.pack()
 
 
-                button5 = tk.Button(self, text = "Previous page", command = lambda: controller.show_frame(RecordPage))
+                button5 = tk.Button(self, text = "Previous page", highlightbackground = "black", command = lambda: controller.show_frame(RecordPage))
 
-                button6 = tk.Button(self, text = "Return to main page", command = lambda: controller.show_frame(HomePage))
+                button6 = tk.Button(self, text = "Return to main page", highlightbackground = "black", command = lambda: controller.show_frame(HomePage))
                 button6.pack()
 
+                image = Image.open("waves.png")
+                photo = ImageTk.PhotoImage(image)
+                label = Label(self, anchor = W, image = photo, justify = CENTER, borderwidth = 0)
+                label.image = photo
+                label.pack()
 
-                canvas = FigureCanvasTkAgg(f, self)
-                canvas.show()
-                canvas.get_tk_widget().pack(side = tk.BOTTOM, fill = tk.BOTH, expand = True)
+
                 #This is put here so it goes after the warning that gets created from that line ^
                 print('░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░')
                 print('Welcome to 3D synth! Diagnostic information will be printed here.')
 
-##                toolbar = NavigationToolbar2TkAgg(canvas, self)
-##                toolbar.update()
-##                canvas._tkcanvas.pack(side = tk.TOP, fill = tk.BOTH, expand = True)
+
 
 
 
 class FinalizeTrackPage(tk.Frame):
 
         def __init__(self, parent, controller):
-                tk.Frame.__init__(self, parent)
+                tk.Frame.__init__(self, parent, background = "black")
                 label = tk.Label(self, text = "Finalize the current track", font = LARGE_FONT)
 
-                button1 = tk.Button(self, text = "Add track to song", command =  lambda: [addToSong(), controller.show_frame(HomePage)])
+                button1 = tk.Button(self, text = "Add track to song", highlightbackground = "black",  command =  lambda: [addToSong(), controller.show_frame(HomePage)])
                 button1.pack()
 
-                button2 = tk.Button(self, text = "Discard track", command = lambda: controller.show_frame(HomePage))
+                button2 = tk.Button(self, text = "Discard track", highlightbackground = "black", command = lambda: controller.show_frame(HomePage))
                 button2.pack()
+
+                image = Image.open("mergeboi.jpg")
+                photo = ImageTk.PhotoImage(image)
+                label = Label(self, anchor = W, image = photo, justify = CENTER, borderwidth = 0)
+                label.image = photo
+                label.pack()
 
 
 
@@ -289,26 +283,34 @@ class TrackPage(tk.Frame):
 class HomePage(tk.Frame):
 
         def __init__(self,parent, controller):
-                tk.Frame.__init__(self,parent)
-                label = tk.Label(self, text = "Start a new song, add to your current song, or play your current song", font = LARGE_FONT)
+                tk.Frame.__init__(self,parent, background = "black")
+                label = tk.Label(self, text = "Start a new song, add to your current song, or play your current song", font = LARGE_FONT, bg = "black")
                 label.pack(pady = 10, padx = 10)
 
                 #For Home button
 
-                button5 = tk.Button(self, text = "Start New Song", command = resetSong)
+                button5 = tk.Button(self, text = "Start New Song", highlightbackground = "black", command = resetSong)
                 button5.pack()
 
-                button2 = tk.Button(self, text = "Play Current Song", command = playSong)
+                button2 = tk.Button(self, text = "Play Current Song", highlightbackground = "black", command = playSong)
                 button2.pack()
 
-                button3 = tk.Button(self, text = "Add track to current song", command = lambda: controller.show_frame(RecordPage))
+                button3 = tk.Button(self, text = "Add track to current song", highlightbackground = "black", command = lambda: controller.show_frame(RecordPage))
                 button3.pack()
 
-                button4 = tk.Button(self, text = "Export Song", command = exportSong)
+                button4 = tk.Button(self, text = "Export Song", highlightbackground = "black", command = exportSong)
                 button4.pack()
 
-                button1 = tk.Button(self, text = "Return to Home", command = lambda:  controller.show_frame(StartPage))
+                button1 = tk.Button(self, text = "Return to Home", highlightbackground = "black", command = lambda:  controller.show_frame(StartPage))
                 button1.pack()
+
+                image = Image.open("keyboi.jpg")
+                photo = ImageTk.PhotoImage(image)
+                label = Label(self, anchor = W, image = photo, justify = CENTER, borderwidth = 0)
+                label.image = photo
+                label.pack()
+
+
 
 
 
@@ -330,5 +332,4 @@ class PageOne(tk.Frame):
 
 
 app = ThreeDSynth()
-ani = animation.FuncAnimation(f, animate, interval = 1000)
 app.mainloop()
