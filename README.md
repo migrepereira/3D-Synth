@@ -45,12 +45,14 @@ There are 2 ways to start the app:
 If you are on a mac, and the main 3D-Synth directory is on your desktop, just
 open the application we made! (Note, you may have to go to your system
 preferences and change your security preferences because I'm not a "trusted
-developer")
+developer"). This is reccomended as it clears the pycache which we think might have been causing bugs
 
 If not, navigate to the 3D-Synth directory in the terminal and run "python3
 Sliders.py"
 
 Once you have the app running:
+
+Keep the terminal open! Diagnostic information will be printed and you can see how the program works.
 
 Currently, there are no tracks in your song. The first thing to do is to add a new track (Click on "Add track to current song").
 
@@ -77,3 +79,6 @@ Missing modules means a library wasn't properly installed.
 Most errors should go away if you just restart the program
 
 If it says value not in list during recording just restart program
+
+Sometimes the channels aren't different and only the distance part of the 3D works. Restarting the program "should" fix this,
+but sometimes you will have to restart it a few times. Still looking into why that happens
