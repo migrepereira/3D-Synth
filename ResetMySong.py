@@ -1,3 +1,5 @@
+#Cameron Cook
+
 import pygame.midi
 import pygame.mixer
 import time

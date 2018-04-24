@@ -1,3 +1,5 @@
+#Brian Burwell, Cameron Cook
+
 import numpy as np
 import scipy as sp
 import scipy.io as spio

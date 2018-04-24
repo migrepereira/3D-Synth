@@ -1,3 +1,5 @@
+#Cameron Cook
+
 from pydub import AudioSegment
 import wave
 import contextlib

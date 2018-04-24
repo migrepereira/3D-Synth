@@ -1,3 +1,5 @@
+#Cameron Cook, Kevin Naughton
+
 import pygame.midi
 import pygame.mixer
 import time
