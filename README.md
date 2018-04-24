@@ -22,12 +22,12 @@ localize track.
 -Python3. Along with a lot of libraries, all of which can be installed with
 "pip3 install <library name>" in terminal. The libraries you will need to have
 installed with this method include:
-matplotlib
+image
 numpy
 pandas
-PIL
 pydub
 pygame
+scipy
 tkinter
 
 Another package you will need to have installed is ffmpeg. If you're on a mac
