@@ -22,11 +22,17 @@ localize track.
 -Python3. Along with a lot of libraries, all of which can be installed with
 "pip3 install <library name>" in terminal. The libraries you will need to have
 installed with this method include:
-############## LIBRARIES NEEDED TO DOWNLOAD
+matplotlib
+numpy
+pandas
+PIL
+pydub
+pygame
+tkinter
 
 Another package you will need to have installed is ffmpeg. If you're on a mac
 and using homebrew, this can easily be installed with "brew install ffmpeg".
-If you aren't, here are instillation instructions:
+If you aren't, here are installation instructions:
 https://github.com/adaptlearning/adapt_authoring/wiki/Installing-FFmpeg.
 This is just used when exporting the track out to an MP3. If you don't have it,
 the final song will be "mySong.wav" in the directory
