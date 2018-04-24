@@ -104,7 +104,7 @@ class StartPage(tk.Frame):
         def __init__(self, parent, controller):
                 #parent is name of parent class (ThreeDSynth)
                 tk.Frame.__init__(self, parent, background = "black")
-                label = tk.Label(self, text = "Welcome to 3D Synth, an app that lets you create your own 3D song!", font = LARGE_FONT, fg = "purple", bg = "black")
+                label = tk.Label(self, text = "Welcome to 3D Synth, an app that lets you create your own 3D song!", font = LARGE_FONT, fg = "white", bg = "black")
                 label.pack(pady = 10, padx = 10)
 
                 button1 = tk.Button(self, text = "Get started", command = lambda:  controller.show_frame(HomePage))
