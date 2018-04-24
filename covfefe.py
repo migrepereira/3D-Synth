@@ -113,6 +113,8 @@ def callCovfefe(x,y,z):
         else:
             e_index = 49
 
+    if (e_index is 50):
+        e_index = 49
     if abs(Ce[e_index - 1] - e) < abs(Ce[e_index] - e):
         e_index -= 1
 

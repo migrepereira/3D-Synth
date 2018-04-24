@@ -44,13 +44,11 @@ developer")
 If not, navigate to the 3D-Synth directory in the terminal and run "python3
 Sliders.py"
 
-############# INSTRUCTIONS ON ALL BUTTONS
-
-From the desktop, double click "3DBeats" to run the app and open the user interface and click the button to get started.
+Once you have the app running:
 
 Currently, there are no tracks in your song. The first thing to do is to add a new track (Click on "Add track to current song").
 
-On the new track menu, select which waveform you want to use (SIN, SQUARE, or SAW) and begin playing your track on the input hardware. Once you're done recording, end the recording by either pressing H on the hardware if you're using the Launchpad Mini or by pressing the highest C if you're using a MIDI keyboard. You can click "Playback track" to hear what you recorded. Now that the track is recorded, it's time to put it in 3D space. From the menu, click "Localize Track", which will bring you to a new menu. 
+On the new track menu, select which waveform you want to use (SIN, SQUARE, or SAW) and begin playing your track on the input hardware. Once you're done recording, end the recording by either pressing H on the hardware if you're using the Launchpad Mini or by pressing the highest C if you're using a MIDI keyboard. You can click "Playback track" to hear what you recorded. Now that the track is recorded, it's time to put it in 3D space. From the menu, click "Localize Track", which will bring you to a new menu.
 
 On this menu, you can click and drag on each of the three sliders to indicate where in space you want the track to appear (+X will appear on your right, +Y will appear above you, +Z will appear in front of you). You can test how it sounds before you commit this location by clicking "Play". Once you're satisfied with the sound of the track, click "Done" to add it to your song.
 
